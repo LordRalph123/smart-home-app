@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:smart_home_app/access/door.dart';
 import 'package:smart_home_app/access/gate.dart';
 import 'package:smart_home_app/lights/dining.dart';
 import 'package:smart_home_app/lights/toilet.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,13 +22,17 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isToilet = false;
   bool isPerimeter = false;
 
-final blue = FlutterBluePlus.instance;
+  final blue = FlutterBluePlus.instance;
   BluetoothDevice? targetDevice;
+  late StreamController<bool> _pirStatusController;
+  late Stream<bool> _pirStatusStream;
+
 
   @override
   void initState() {
     super.initState();
     _connectToDevice();
+    _setupPirStatusStream();
   }
 
   void _connectToDevice() async {
@@ -64,6 +69,22 @@ final blue = FlutterBluePlus.instance;
     }
   }
 
+ void _setupPirStatusStream() {
+    _pirStatusController = StreamController<bool>();
+    _pirStatusStream = _pirStatusController.stream;
+  }
+
+  void _updatePirStatus(bool status) {
+    _pirStatusController.add(status);
+  }
+
+
+  @override
+  void dispose() {
+    _pirStatusController.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +99,9 @@ final blue = FlutterBluePlus.instance;
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                     
+                  },
                   icon: const Icon(
                     Icons.person_2,
                     size: 24,
@@ -140,6 +163,9 @@ final blue = FlutterBluePlus.instance;
                       onPressed: () {
                         setState(() {
                           isButtonClicked = !isButtonClicked;
+                          isButtonClicked
+                              ? _sendCommand('9')
+                              : _sendCommand('A');
                         });
                       },
                       child: isButtonClicked
@@ -192,6 +218,9 @@ final blue = FlutterBluePlus.instance;
                       onPressed: () {
                         setState(() {
                           isButtonClick = !isButtonClick;
+                          isButtonClicked
+                              ? _sendCommand('B')
+                              : _sendCommand('C');
                         });
                       },
                       child:
@@ -255,10 +284,11 @@ final blue = FlutterBluePlus.instance;
                             borderRadius: BorderRadius.all(
                               Radius.circular(18),
                             ),
-                             ),
+                          ),
                           onPressed: () {
                             setState(() {
                               isParlor = !isParlor;
+                              isParlor ? _sendCommand('0') : _sendCommand('1');
                             });
                           },
                           child: isParlor ? const RedOn() : const RedOff(),
@@ -308,6 +338,7 @@ final blue = FlutterBluePlus.instance;
                           onPressed: () {
                             setState(() {
                               isKitchen = !isKitchen;
+                              isKitchen ? _sendCommand('2') : _sendCommand('3');
                             });
                           },
                           child: isKitchen ? const BlueOn() : const BlueOff(),
@@ -361,6 +392,7 @@ final blue = FlutterBluePlus.instance;
                           onPressed: () {
                             setState(() {
                               isToilet = !isToilet;
+                              isToilet ? _sendCommand('4') : _sendCommand('5');
                             });
                           },
                           child: isToilet ? const BlueOn() : const BlueOff(),
@@ -410,6 +442,9 @@ final blue = FlutterBluePlus.instance;
                           onPressed: () {
                             setState(() {
                               isPerimeter = !isPerimeter;
+                              isPerimeter
+                                  ? _sendCommand('6')
+                                  : _sendCommand('7');
                             });
                           },
                           child: isPerimeter ? const RedOn() : const RedOff(),
