@@ -21,8 +21,49 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isToilet = false;
   bool isPerimeter = false;
 
+final blue = FlutterBlue.instance;
+  BluetoothDevice? targetDevice;
 
-  
+  @override
+  void initState() {
+    super.initState();
+    _connectToDevice();
+  }
+
+  void _connectToDevice() async {
+    blue.startScan(timeout: Duration(seconds: 4));
+
+    blue.scanResults.listen((results) {
+      for (ScanResult result in results) {
+        if (result.device.name == 'Your Arduino Bluetooth Name') {
+          targetDevice = result.device;
+          break;
+        }
+      }
+    });
+
+    blue.stopScan();
+
+    if (targetDevice != null) {
+      await targetDevice!.connect();
+    }
+  }
+
+  Future<void> _sendCommand(String command) async {
+    if (targetDevice != null) {
+      List<BluetoothService> services = await targetDevice!.discoverServices();
+      for (BluetoothService service in services) {
+        List<BluetoothCharacteristic> characteristics = service.characteristics;
+        for (BluetoothCharacteristic characteristic in characteristics) {
+          if (characteristic.properties.write) {
+            await characteristic.write([command.codeUnitAt(0)]);
+            return;
+          }
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
