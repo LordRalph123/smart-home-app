@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isKitchen = false;
   bool isToilet = false;
   bool isPerimeter = false;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
