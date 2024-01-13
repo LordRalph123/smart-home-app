@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late StreamController<bool> _pirStatusController;
   late Stream<bool> _pirStatusStream;
 
-
   @override
   void initState() {
     super.initState();
@@ -69,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
- void _setupPirStatusStream() {
+  void _setupPirStatusStream() {
     _pirStatusController = StreamController<bool>();
     _pirStatusStream = _pirStatusController.stream;
   }
@@ -77,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void _updatePirStatus(bool status) {
     _pirStatusController.add(status);
   }
-
 
   @override
   void dispose() {
@@ -100,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 IconButton(
                   onPressed: () {
-                     
+                    _sendCommand('8');
                   },
                   icon: const Icon(
                     Icons.person_2,
