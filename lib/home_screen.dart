@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   BluetoothDevice? targetDevice;
   late StreamController<bool> _pirStatusController;
   late Stream<bool> _pirStatusStream;
+  bool isPirActivated = false;
 
   @override
   void initState() {
@@ -100,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () {
                     _sendCommand('8');
                   },
+                  
                   icon: const Icon(
                     Icons.person_2,
                     size: 24,
