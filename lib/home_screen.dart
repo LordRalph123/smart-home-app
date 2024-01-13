@@ -3,6 +3,7 @@ import 'package:smart_home_app/access/door.dart';
 import 'package:smart_home_app/access/gate.dart';
 import 'package:smart_home_app/lights/dining.dart';
 import 'package:smart_home_app/lights/toilet.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
