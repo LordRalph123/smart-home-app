@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isToilet = false;
   bool isPerimeter = false;
 
-final blue = FlutterBlue.instance;
+final blue = FlutterBluePlus.instance;
   BluetoothDevice? targetDevice;
 
   @override
@@ -31,9 +31,9 @@ final blue = FlutterBlue.instance;
   }
 
   void _connectToDevice() async {
-    blue.startScan(timeout: Duration(seconds: 4));
+    FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
 
-    blue.scanResults.listen((results) {
+    FlutterBluePlus.scanResults.listen((results) {
       for (ScanResult result in results) {
         if (result.device.name == 'Your Arduino Bluetooth Name') {
           targetDevice = result.device;
@@ -42,7 +42,7 @@ final blue = FlutterBlue.instance;
       }
     });
 
-    blue.stopScan();
+    FlutterBluePlus.stopScan();
 
     if (targetDevice != null) {
       await targetDevice!.connect();
