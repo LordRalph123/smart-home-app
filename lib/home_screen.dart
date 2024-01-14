@@ -98,16 +98,18 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  onPressed: () {
-                    _sendCommand('8');
-                  },
-                  
-                  icon: const Icon(
-                    Icons.person_2,
+              icon: Icon(
+                Icons.person_2,
                     size: 24,
-                    color: Colors.lightBlue,
-                  ),
-                ),
+                color: isPirActivated ? Colors.green : Colors.red,
+              ),
+              onPressed: () {
+                _sendCommand('8'); // Toggle PIR sensor
+                setState(() {
+                  isPirActivated = !isPirActivated;
+                });
+              },
+            ),
               ],
             ),
             const SizedBox(height: 30),
