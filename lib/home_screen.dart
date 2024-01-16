@@ -5,7 +5,7 @@ import 'package:smart_home_app/access/door.dart';
 import 'package:smart_home_app/access/gate.dart';
 import 'package:smart_home_app/lights/dining.dart';
 import 'package:smart_home_app/lights/toilet.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,69 +22,20 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isToilet = false;
   bool isPerimeter = false;
 
-  final blue = FlutterBluePlus.instance;
-  BluetoothDevice? targetDevice;
-  late StreamController<bool> _pirStatusController;
-  late Stream<bool> _pirStatusStream;
+final String esp32IpAddress = '192.168.1.100'; // Replace with your ESP32 IP address
   bool isPirActivated = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _connectToDevice();
-    _setupPirStatusStream();
-  }
-
-  void _connectToDevice() async {
-    FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
-
-    FlutterBluePlus.scanResults.listen((results) {
-      for (ScanResult result in results) {
-        if (result.device.name == 'Your Arduino Bluetooth Name') {
-          targetDevice = result.device;
-          break;
-        }
-      }
-    });
-
-    FlutterBluePlus.stopScan();
-
-    if (targetDevice != null) {
-      await targetDevice!.connect();
-    }
-  }
-
   Future<void> _sendCommand(String command) async {
-    if (targetDevice != null) {
-      List<BluetoothService> services = await targetDevice!.discoverServices();
-      for (BluetoothService service in services) {
-        List<BluetoothCharacteristic> characteristics = service.characteristics;
-        for (BluetoothCharacteristic characteristic in characteristics) {
-          if (characteristic.properties.write) {
-            await characteristic.write([command.codeUnitAt(0)]);
-            return;
-          }
-        }
-      }
+    final response = await http.get(Uri.parse('http://$esp32IpAddress/$command'));
+
+    if (response.statusCode == 200) {
+      print('Command $command sent successfully');
+    } else {
+      print('Failed to send command $command. Status code: ${response.statusCode}');
     }
   }
 
-  void _setupPirStatusStream() {
-    _pirStatusController = StreamController<bool>();
-    _pirStatusStream = _pirStatusController.stream;
-  }
-
-  void _updatePirStatus(bool status) {
-    _pirStatusController.add(status);
-  }
-
-  @override
-  void dispose() {
-    _pirStatusController.close();
-    super.dispose();
-  }
-
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
