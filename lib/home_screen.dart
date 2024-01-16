@@ -61,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     _sendCommand('8'); //Toggle PIR sensor
                     setState(() {
                       isPirActivated = !isPirActivated;
-                    
                     });
                   },
                 ),
