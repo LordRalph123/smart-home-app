@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _sendCommand(String command) async {
     final response =
-    await http.get(Uri.parse('http://$esp32IpAddress/$command'));
+        await http.get(Uri.parse('http://$esp32IpAddress/$command'));
 
     if (response.statusCode == 200) {
       print('Command $command sent successfully');
@@ -61,6 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     _sendCommand('8'); //Toggle PIR sensor
                     setState(() {
                       isPirActivated = !isPirActivated;
+                      color:
+                      isPirActivated ? Colors.green : Colors.red;
                     });
                   },
                 ),
