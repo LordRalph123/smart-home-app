@@ -22,20 +22,23 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isToilet = false;
   bool isPerimeter = false;
 
-final String esp32IpAddress = '192.168.1.100'; // Replace with your ESP32 IP address
+  final String esp32IpAddress =
+      '192.168.1.100'; // Replace with your ESP32 IP address
   bool isPirActivated = false;
 
   Future<void> _sendCommand(String command) async {
-    final response = await http.get(Uri.parse('http://$esp32IpAddress/$command'));
+    final response =
+        await http.get(Uri.parse('http://$esp32IpAddress/$command'));
 
     if (response.statusCode == 200) {
       print('Command $command sent successfully');
     } else {
-      print('Failed to send command $command. Status code: ${response.statusCode}');
+      print(
+          'Failed to send command $command. Status code: ${response.statusCode}');
     }
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -49,18 +52,18 @@ final String esp32IpAddress = '192.168.1.100'; // Replace with your ESP32 IP add
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-              icon: Icon(
-                Icons.person_2,
+                  icon: Icon(
+                    Icons.person_2,
                     size: 24,
-                color: isPirActivated ? Colors.green : Colors.red,
-              ),
-              onPressed: () {
-                _sendCommand('8');//Toggle PIR sensor
-                setState(() {
-                  isPirActivated = !isPirActivated;
-                });
-              },
-            ),
+                    color: isPirActivated ? Colors.green : Colors.red,
+                  ),
+                  onPressed: () {
+                    _sendCommand('8'); //Toggle PIR sensor
+                    setState(() {
+                      isPirActivated = !isPirActivated;
+                    });
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 30),
