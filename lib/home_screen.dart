@@ -55,13 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(
                     Icons.person_2,
                     size: 24,
-                    color: isPirActivated ? Colors.green : Colors.red,
+                    color: isPirActivated ? Colors.red : Colors.green,
                   ),
                   onPressed: () {
                     _sendCommand('8'); //Toggle PIR sensor
-                    setState(() {
-                      isPirActivated = !isPirActivated;
-                    });
                   },
                 ),
               ],
@@ -78,61 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 9),
-            Container(
-              width: 355,
-              height: 144,
-              decoration: const BoxDecoration(
-                color: Color(0XFF0372E4),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(16),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(22),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 24,
-                          height: 24,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                "assets/door.jpg",
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        const Text(
-                          "Door",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 18),
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          isButtonClicked = !isButtonClicked;
-                          isButtonClicked
-                              ? _sendCommand('9')
-                              : _sendCommand('A');
-                        });
-                      },
-                      child: isButtonClicked
-                          ? const DoorOpen()
-                          : const DoorClose(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 17),
             Container(
               width: 355,
               height: 144,
@@ -180,7 +122,62 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       },
                       child:
-                          isButtonClick ? const GateOpen() : const GateClose(),
+                          isButtonClick ? const GateClose() : const GateOpen(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 17),
+            Container(
+              width: 355,
+              height: 144,
+              decoration: const BoxDecoration(
+                color: Color(0XFF0372E4),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(16),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(22),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 24,
+                          height: 24,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                "assets/door.jpg",
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          "Door",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          isButtonClicked = !isButtonClicked;
+                          isButtonClicked
+                              ? _sendCommand('9')
+                              : _sendCommand('A');
+                        });
+                      },
+                      child: isButtonClicked
+                          ? const DoorClose()
+                          : const DoorOpen(),
                     ),
                   ],
                 ),
@@ -244,10 +241,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {
                             setState(() {
                               isParlor = !isParlor;
-                              isParlor ? _sendCommand('0') : _sendCommand('1');
+                              isParlor ? _sendCommand('1') : _sendCommand('0');
                             });
                           },
-                          child: isParlor ? const RedOn() : const RedOff(),
+                          child: isParlor ? const RedOff() : const RedOn(),
                           //child: ? RedOn() : RedOff(),
                         ),
                       ],
@@ -297,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               isKitchen ? _sendCommand('2') : _sendCommand('3');
                             });
                           },
-                          child: isKitchen ? const BlueOn() : const BlueOff(),
+                          child: isKitchen ? const BlueOff() : const BlueOn(),
                           //child: ? BlueOn() : BlueOff(),
                         ),
                       ],
@@ -351,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               isToilet ? _sendCommand('4') : _sendCommand('5');
                             });
                           },
-                          child: isToilet ? const BlueOn() : const BlueOff(),
+                          child: isToilet ? const BlueOff() : const BlueOn(),
                           //child: ? BlueOn() : BlueOff(),
                         ),
                       ],
@@ -403,7 +400,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : _sendCommand('7');
                             });
                           },
-                          child: isPerimeter ? const RedOn() : const RedOff(),
+                          child: isPerimeter ? const RedOff() : const RedOn(),
                           //child: ? RedOn() : RedOff(),
                         ),
                       ],
