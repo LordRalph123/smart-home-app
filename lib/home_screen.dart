@@ -38,25 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // Check PIR status periodically
-    Timer.periodic(Duration(seconds: 1), (Timer timer) async {
-      int pirStatus = await _checkPIRStatus();
-      setState(() {
-        isPirActivated = (pirStatus == 1);
-      });
-    });
-  }
-
-  Future<int> _checkPIRStatus() async {
-    final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
-    if (response.statusCode == 200) {
-      return int.parse(response.body);
-    } else {
-      print('Failed to get PIR status. Status code: ${response.statusCode}');
-      return 0;
+  Future<void> _checkPIRStatus() async {
+    if (isButtonClicked) {
+      final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
+      if (response.statusCode == 200) {
+        int pirStatus = int.parse(response.body);
+        setState(() {
+          isPirActivated = (pirStatus == 1);
+        });
+      } else {
+        print('Failed to get PIR status. Status code: ${response.statusCode}');
+      }
     }
   }
 
@@ -80,7 +72,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: isPirActivated ? Colors.red : Colors.green,
                   ),
                   onPressed: () {
-                    _sendCommand('8'); //Toggle PIR sensor
+                    // Toggle person icon click state
+                    setState(() {
+                      isButtonClicked = !isButtonClicked;
+                    });
+
+                    // Check PIR status when the person icon is clicked
+                    if (isButtonClicked) {
+                      _checkPIRStatus();
+                      _sendCommand('8');
+                    }
                   },
                 ),
               ],
