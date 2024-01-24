@@ -39,6 +39,28 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Check PIR status periodically
+    Timer.periodic(Duration(seconds: 1), (Timer timer) async {
+      int pirStatus = await _checkPIRStatus();
+      setState(() {
+        isPirActivated = (pirStatus == 1);
+      });
+    });
+  }
+
+  Future<int> _checkPIRStatus() async {
+    final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
+    if (response.statusCode == 200) {
+      return int.parse(response.body);
+    } else {
+      print('Failed to get PIR status. Status code: ${response.statusCode}');
+      return 0;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
