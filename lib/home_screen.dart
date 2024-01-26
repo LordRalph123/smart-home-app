@@ -311,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isKitchen ? const BlueOff() : const BlueOn(),
-                          //child: ? BlueOn() : BlueOff(),
+                          ///child: ? BlueOn() : BlueOff(),
                         ),
                       ],
                     ),
