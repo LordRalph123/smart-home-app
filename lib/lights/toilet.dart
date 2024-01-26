@@ -68,7 +68,7 @@ class RedOff extends StatelessWidget {
             Text(
               "On",
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 14,
                 color: Color(0XFFFF8E94),
               ),
             ),
