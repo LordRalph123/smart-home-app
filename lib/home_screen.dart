@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isButtonClick = false;
   bool isParlor = false;
   bool isKitchen = false;
-  bool isToilet = false;
+  bool isBedroom = false;
   bool isPerimeter = false;
 
   final String esp32IpAddress =
@@ -39,16 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _checkPIRStatus() async {
-    if (isButtonClicked) {
-      final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
-      if (response.statusCode == 200) {
-        int pirStatus = int.parse(response.body);
-        setState(() {
-          isPirActivated = (pirStatus == 1);
-        });
-      } else {
-        print('Failed to get PIR status. Status code: ${response.statusCode}');
-      }
+    final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
+    if (response.statusCode == 200) {
+      int pirStatus = int.parse(response.body);
+      setState(() {
+        isPirActivated = (pirStatus == 1);
+      });
+    } else {
+      print('Failed to get PIR status. Status code: ${response.statusCode}');
     }
   }
 
@@ -65,25 +63,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.person_2,
-                    size: 24,
-                    color: isPirActivated ? Colors.red : Colors.green,
-                  ),
-                  onPressed: () {
-                    // Toggle person icon click state
-                    setState(() {
-                      isButtonClicked = !isButtonClicked;
-                    });
-
-                    // Check PIR status when the person icon is clicked
-                    if (isButtonClicked) {
-                      _checkPIRStatus();
-                      _sendCommand('8');
-                    }
-                  },
-                ),
+                MaterialButton(
+                    child: Container(
+                      height: 21,
+                      width: 21,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isPirActivated ? Colors.red : Colors.green,
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _checkPIRStatus();
+                        _sendCommand('8');
+                      });
+                    }),
               ],
             ),
             const SizedBox(height: 30),
@@ -139,9 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         setState(() {
                           isButtonClick = !isButtonClick;
-                          isButtonClicked
-                              ? _sendCommand('B')
-                              : _sendCommand('C');
+                          isButtonClick ? _sendCommand('D') : _sendCommand('E');
+                          isButtonClick ? _sendCommand('B') : _sendCommand('C');
                         });
                       },
                       child:
@@ -264,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {
                             setState(() {
                               isParlor = !isParlor;
-                              isParlor ? _sendCommand('1') : _sendCommand('0');
+                              isParlor ? _sendCommand('0') : _sendCommand('1');
                             });
                           },
                           child: isParlor ? const RedOff() : const RedOn(),
@@ -367,11 +360,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialButton(
                           onPressed: () {
                             setState(() {
-                              isToilet = !isToilet;
-                              isToilet ? _sendCommand('4') : _sendCommand('5');
+                              isBedroom = !isBedroom;
+                              isBedroom ? _sendCommand('4') : _sendCommand('5');
                             });
                           },
-                          child: isToilet ? const BlueOff() : const BlueOn(),
+                          child: isBedroom ? const BlueOff() : const BlueOn(),
                           //child: ? BlueOn() : BlueOff(),
                         ),
                       ],
@@ -420,7 +413,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               isPerimeter = !isPerimeter;
                               isPerimeter
                                   ? _sendCommand('6')
-                                  : _sendCommand('7');
+                                  : _sendCommand('71 ');
                             });
                           },
                           child: isPerimeter ? const RedOff() : const RedOn(),
