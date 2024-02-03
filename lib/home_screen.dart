@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       setState(() {
                         _checkPIRStatus();
-                        _sendCommand('8')
+                        _sendCommand
                       });
                     }),
               ],
