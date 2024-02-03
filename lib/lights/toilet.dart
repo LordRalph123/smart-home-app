@@ -66,7 +66,7 @@ class RedOff extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "On",
+              "On"
               style: TextStyle(
                 fontSize: 14,
                 color: Color(0XFFFF8E94),
