@@ -40,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _checkPIRStatus() async {
+    // Send a command to ESP32 to check PIR status
+    
     final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
     if (response.statusCode == 200) {
       int pirStatus = int.parse(response.body);
