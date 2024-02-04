@@ -22,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isBedroom = false;
   bool isPerimeter = false;
 
-  final String esp32IpAddress =
-      '192.168.4.1'; 
-      ///Replace with your ESP32 IP address 
+  final String esp32IpAddress = '192.168.4.1';
+
+  ///Replace with your ESP32 IP address
   bool isPirActivated = false;
 
   Future<void> _sendCommand(String command) async {
@@ -53,8 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
+
     ///Periodically check PIR status
     Timer.periodic(Duration(seconds: 5), (timer) {
       _checkPIRStatus();
@@ -86,7 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       setState(() {
                         _checkPIRStatus();
-                      
                       });
                     }),
               ],
@@ -272,6 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isParlor ? const RedOff() : const RedOn(),
+
                           ///child: ? RedOn() : RedOff(),
                         ),
                       ],
@@ -322,6 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isKitchen ? const BlueOff() : const BlueOn(),
+
                           ///child: ? BlueOn() : BlueOff(),
                         ),
                       ],
@@ -376,7 +378,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isBedroom ? const BlueOff() : const BlueOn(),
-                         ///child: ? BlueOn() : BlueOff(),
+
+                          ///child: ? BlueOn() : BlueOff(),
                         ),
                       ],
                     ),
@@ -428,6 +431,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isPerimeter ? const RedOff() : const RedOn(),
+
                           ///child: ? RedOn() : RedOff(),
                         ),
                       ],
