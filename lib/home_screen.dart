@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    ///Periodically check PIR status
+    //Periodically check PIR status
     Timer.periodic(Duration(seconds: 5), (timer) {
       _checkPIRStatus();
     });
