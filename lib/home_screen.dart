@@ -23,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isPerimeter = false;
 
   final String esp32IpAddress = '192.168.4.1';
-
   //Replace with your ESP32 IP address
   bool isPirActivated = false;
   Future<void> _sendCommand(String command) async {
