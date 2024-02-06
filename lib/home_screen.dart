@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //Replace with your ESP32 IP address
   bool isPirActivated = false;
-
   Future<void> _sendCommand(String command) async {
     final response =
         await http.get(Uri.parse('http://$esp32IpAddress/$command'));
