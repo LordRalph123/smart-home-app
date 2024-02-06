@@ -35,7 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
           'Failed to send command $command. Status code: ${response.statusCode}');
     }
   }
-
   Future<void> _checkPIRStatus() async {
     // Fetch the PIR status from ESP32
     final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
