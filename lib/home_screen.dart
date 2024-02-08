@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       },
                       child:
-                          isButtonClick ?  GateClose() : con GateOpen(),
+                          isButtonClick ?  GateClose() : co GateOpen(),
                     ),
                   ],
                 ),
