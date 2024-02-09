@@ -268,7 +268,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isParlor ? const RedOff() : const RedOn(),
-
                           ///child: ? RedOn() : RedOff(),
                         ),
                       ],
