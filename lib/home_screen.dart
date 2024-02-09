@@ -130,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 12),
                         const Text(
                           "Gate",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: TextStyle(fontSize: 16,
+                           color: Colors.white),
                         ),
                       ],
                     ),
