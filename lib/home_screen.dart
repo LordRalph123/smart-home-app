@@ -373,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isBedroom ? const BlueOff() : const BlueOn(),
-//go there and
+//go there and 
                           ///child: ? BlueOn() : BlueOff(),
                         ),
                       ],
