@@ -423,7 +423,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               isPerimeter
                                   ? _sendCommand('6')
                                   : _sendCommand('7');
-                            });
+                            },);
                           },
                           child: isPerimeter ? const RedOff() : const RedOn(),
 
