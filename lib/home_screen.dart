@@ -426,7 +426,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             },);
                           },
                           child: isPerimeter ? const RedOff() : const RedOn(),
-
                           ///child: ? RedOn() : RedOff(),
                         ),
                       ],
@@ -441,4 +440,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-////faithfulness this coming mn jsvcqaws if gdkytd ktydtlyui
+////faithfulness this coming mn jsvcqaws if gdkytd ktyd
