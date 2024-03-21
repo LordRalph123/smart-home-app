@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _sendCommand(String command) async {
     final response =
         await http.get(Uri.parse('http://$esp32IpAddress/$command'));
- 
+
     if (response.statusCode == 200) {
       print('Command $command sent successfully');
     } else {
@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'Failed to send command $command. Status code: ${response.statusCode}');
     }
   }
+
   Future<void> _checkPIRStatus() async {
     ///Fetch the PIR status from ESP32
     final response = await http.get(Uri.parse('http://$esp32IpAddress/8'));
@@ -130,8 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 12),
                         const Text(
                           "Gate",
-                          style: TextStyle(fontSize: 16,
-                           color: Colors.white),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ],
                     ),
@@ -268,7 +268,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isParlor ? const RedOff() : const RedOn(),
-                           ///child: ? RedOn() : RedOff(),
+
+                          ///child: ? RedOn() : RedOff(),
                         ),
                       ],
                     ),
@@ -373,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: isBedroom ? const BlueOff() : const BlueOn(),
-//go there and 
+//go there and
                           ///child: ? BlueOn() : BlueOff(),
                         ),
                       ],
@@ -418,14 +419,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 30),
                         MaterialButton(
                           onPressed: () {
-                            setState(() {
-                              isPerimeter = !isPerimeter;
-                              isPerimeter
-                                  ? _sendCommand('6')
-                                  : _sendCommand('7');
-                            },);
+                            setState(
+                              () {
+                                isPerimeter = !isPerimeter;
+                                isPerimeter
+                                    ? _sendCommand('6')
+                                    : _sendCommand('7');
+                              },
+                            );
                           },
                           child: isPerimeter ? const RedOff() : const RedOn(),
+
                           ///child: ? RedOn() : RedOff(),
                         ),
                       ],
@@ -440,4 +444,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-////faithfulness this coming mn jsvcqaws if gdkytd ktyd
+/////faithfulness this coming mn jsvcqaws if gdkytd ktyd
