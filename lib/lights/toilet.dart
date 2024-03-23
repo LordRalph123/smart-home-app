@@ -43,7 +43,6 @@ class RedOn extends StatelessWidget {
 
 class RedOff extends StatelessWidget {
   const RedOff({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
