@@ -99,7 +99,7 @@ class GateClose extends StatelessWidget {
                 fontSize: 13,
               ),
             ),
-            const SizedBox(width: 64),
+            const SizedBox(width:64),
             const CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
