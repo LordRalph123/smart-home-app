@@ -70,7 +70,7 @@ class RedOff extends StatelessWidget {
                 color: Color(0XFFFF8E94),
               ),
             ),
-            SizedBox(width:5),
+            SizedBox(width:5,),
             CircleAvatar(
               radius: 12,
               backgroundColor: Color(0XFFFF3642),
