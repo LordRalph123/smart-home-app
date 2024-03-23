@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class RedOn extends StatelessWidget {
   const RedOn({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
