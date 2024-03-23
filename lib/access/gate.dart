@@ -71,7 +71,8 @@ class GateClose extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(32),
         ),
-        border: Border.all(color: const Color(0xFF0376EC),width: 1),
+        border: Border.all(color: const Color(0xFF0376EC),
+        width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(4),
