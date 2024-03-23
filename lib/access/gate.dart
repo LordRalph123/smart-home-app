@@ -78,7 +78,7 @@ class GateClose extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(width: 100),
+            const SizedBox(width: 100,),
             Container(
               width: 12,
               height: 12,
