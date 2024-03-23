@@ -51,7 +51,7 @@ class RedOff extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0XFFFFBABE),
         borderRadius: const BorderRadius.all(
-          Radius.circular(18),
+          Radius.circular(18,),
         ),
         border: Border.all(
           color: const Color(0XFFFF8E94),
