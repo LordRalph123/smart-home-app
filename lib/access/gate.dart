@@ -30,7 +30,8 @@ class GateOpen extends StatelessWidget {
                 ),
               ),
             ),
-           const SizedBox(width:72,),
+           const SizedBox(
+            width:72,),
             const Text(
               "Open",
               style: TextStyle(
