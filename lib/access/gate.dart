@@ -92,7 +92,7 @@ class GateClose extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width:8),
             const Text(
               "Close",
               style: TextStyle(
