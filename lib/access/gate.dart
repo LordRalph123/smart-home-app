@@ -16,7 +16,7 @@ class GateOpen extends StatelessWidget {
         border: Border.all(color: const Color(0xFF0376EC), width: 1),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4,),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
