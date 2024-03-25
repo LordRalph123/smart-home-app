@@ -39,7 +39,7 @@ class GateOpen extends StatelessWidget {
                 fontSize: 13,
               ),
             ),
-            const SizedBox(width: 8,),
+            const SizedBox(width:8,),
             Container(
               width: 12,
               height: 12,
@@ -58,7 +58,6 @@ class GateOpen extends StatelessWidget {
     );
   }
 }
-
 class GateClose extends StatelessWidget {
   const GateClose({super.key});
 
